@@ -1,0 +1,11 @@
+.badge {
+  background-color: #f2f2f2;
+  padding: 5px 10px;
+  border-radius: 12px;
+}
+.badge p {
+  font-size: 14px;
+  line-height: 17px;
+  color: #b9b9b9;
+  font-weight: 700;
+}

@@ -1,0 +1,36 @@
+.task-viewer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: self-start;
+  width: 1100px;
+}
+
+.task-viewer-body {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: #293e472f;
+  border-radius: 12px;
+  margin: 0px 40px 40px 0px;
+  height: 600px;
+  width: 1100px;
+  overflow: auto;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(168, 168, 168);
+  border-radius: 10px;
+}
+
+.task-list {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
