@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./CreateTaskForms.css";
 
-const CreateTaskForm = () => {
+const CreateTaskForm = (props) => {
   const [taskName, setTaskName] = useState("");
-  const [taskDueDate, setTaskDate] = useState();
+  const [dueDate, setTaskDate] = useState();
   const [taskDetails, setTaskDetails] = useState("");
 
   const handleNameChange = (event) => {
@@ -15,19 +15,25 @@ const CreateTaskForm = () => {
   const handleDetailsChange = (event) => {
     setTaskDetails(event.target.value);
   };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const newTask = {
-      taskName: taskName,
-      taskDueDate: taskDueDate,
-      taskDetails: taskDetails,
-      status: "To Do",
-    };
-    console.log(newTask);
+
+  const resetForms = () => {
     setTaskName("");
     setTaskDate("");
     setTaskDetails("");
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newTask = {
+      taskName: taskName,
+      taskDueDate: dueDate,
+      taskDetails: taskDetails,
+      status: "To Do",
+    };
+    props.onNewAddTask(newTask);
+    resetForms();
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -43,7 +49,7 @@ const CreateTaskForm = () => {
         <div className="form-row">
           <label className="label-vd">Due Data</label>
           <input
-            value={taskDueDate}
+            value={dueDate}
             onChange={handleDataChange}
             className="input-primary"
             type="date"
