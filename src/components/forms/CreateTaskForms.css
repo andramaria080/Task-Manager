@@ -1,0 +1,41 @@
+.form-row {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0px;
+}
+.label-vd {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 10px;
+  color: #0b0131;
+}
+.input-primary {
+  margin: 5px 0px;
+  padding: 16px;
+  gap: 10px;
+  border: 1px solid #6495ed;
+  border-radius: 12px;
+  font-size: 16px;
+  font-family: "Sen" sans-serif;
+}
+textarea.input-primary {
+  resize: none;
+}
+.button-primary {
+  background: rgb(112, 112, 250);
+  border-radius: 12px;
+  padding: 19px 74px;
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  color: white;
+  line-height: 12px;
+  cursor: pointer;
+  font-family: "Sen" sans-serif;
+}
+.button-primary:hover {
+  background: linear-gradient(rgb(0, 0, 0, 0.3) 0, 0);
+  background-blend-mode: lighten;
+  background-blend-mode: darken;
+}

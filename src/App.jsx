@@ -1,5 +1,7 @@
+import React from "react";
 import "./App.css";
 import TaskViewer from "./components/task-viewer/TaskViewer";
+import CreateTaskForm from "./components/forms/CreateTaskForm";
 
 function App() {
   const data = [
@@ -50,6 +52,13 @@ function App() {
   return (
     <div className="app">
       <TaskViewer taskList={data} />
+
+      <div className="slide-bar-right">
+        <div className="card-x1">
+          <h3 id="create-task">Create Task</h3>
+          <CreateTaskForm />
+        </div>
+      </div>
     </div>
   );
 }
