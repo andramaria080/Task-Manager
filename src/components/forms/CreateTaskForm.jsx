@@ -3,7 +3,7 @@ import "./CreateTaskForms.css";
 
 const CreateTaskForm = () => {
   const [taskName, setTaskName] = useState("");
-  const [taskDueDate, setTaskDate] = useState("");
+  const [taskDueDate, setTaskDate] = useState();
   const [taskDetails, setTaskDetails] = useState("");
 
   const handleNameChange = (event) => {
@@ -24,6 +24,9 @@ const CreateTaskForm = () => {
       status: "To Do",
     };
     console.log(newTask);
+    setTaskName("");
+    setTaskDate("");
+    setTaskDetails("");
   };
   return (
     <div>
@@ -31,6 +34,7 @@ const CreateTaskForm = () => {
         <div className="form-row">
           <label className="label-vd">Task Name</label>
           <input
+            value={taskName}
             onChange={handleNameChange}
             className="input-primary"
             type="text"
@@ -39,6 +43,7 @@ const CreateTaskForm = () => {
         <div className="form-row">
           <label className="label-vd">Due Data</label>
           <input
+            value={taskDueDate}
             onChange={handleDataChange}
             className="input-primary"
             type="date"
@@ -47,6 +52,7 @@ const CreateTaskForm = () => {
         <div className="form-row">
           <label className="label-vd">Details</label>
           <textarea
+            value={taskDetails}
             onChange={handleDetailsChange}
             className="input-primary"
             cols="38"
