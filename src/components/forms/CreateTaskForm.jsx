@@ -25,10 +25,10 @@ const CreateTaskForm = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newTask = {
-      taskName: taskName,
-      taskDueDate: dueDate,
-      taskDetails: taskDetails,
-      status: "To Do",
+      name: taskName,
+      dueDate: dueDate,
+      details: taskDetails,
+      status: "To do",
     };
     props.onNewAddTask(newTask);
     resetForms();
