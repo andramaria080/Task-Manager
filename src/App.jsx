@@ -50,15 +50,6 @@ function App() {
     },
   ];
   const [taskList, setTaskList] = useState(data);
-  const [isOpen, setIsOpen] = useState(false);
-
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-  };
 
   const onNewTaskAdd = (newTask) => {
     setTaskList((prevState) => [
@@ -69,20 +60,12 @@ function App() {
         id: "T-" + prevState.length + 1,
       },
     ]);
-    closeModal(); //Close the modal after you Create the New Task.
   };
 
   return (
     <div className="app">
-      <TaskViewer onCreateClick={openModal} taskList={taskList} />
+      <TaskViewer onNewTaskAdd={onNewTaskAdd} taskList={taskList} />
       <div className="slide-bar-right"></div>
-      <Modal onClose={closeModal} isOpen={isOpen}>
-        {/* Next are the "props.children" from Modal.jsx */}
-        <div className="card-x1">
-          <h3 id="create-task">Create Task</h3>
-          <CreateTaskForm onNewAddTask={onNewTaskAdd} />
-        </div>
-      </Modal>
     </div>
   );
 }
