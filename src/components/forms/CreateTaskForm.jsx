@@ -28,7 +28,7 @@ const CreateTaskForm = (props) => {
       name: taskName,
       dueDate: dueDate,
       details: taskDetails,
-      status: "To do",
+      status: "Todo",
     };
     props.onNewAddTask(newTask);
     resetForms();
