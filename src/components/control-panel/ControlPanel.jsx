@@ -4,8 +4,7 @@ import Modal from "../modal/Modal";
 import CreateTaskForm from "../forms/CreateTaskForm";
 
 function ControlPanel(props) {
-  // To acces the props and the events from Modal.
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, setIsOpen, onNewTaskAdd, taskList } = props;
 
   const openModal = () => {
     setIsOpen(true);
@@ -16,7 +15,7 @@ function ControlPanel(props) {
 
   // Send the newTask as props on handleNewTaskAdd to know what we create and to close the Modal after that.
   const handleNewTaskAdd = (newTask) => {
-    props.onNewTaskAdd(newTask);
+    onNewTaskAdd(newTask);
     closeModal();
   };
 
@@ -26,9 +25,13 @@ function ControlPanel(props) {
         <h3 className="view-title">Tasks</h3>
         <p className="subtitle">Your tasks in your space.</p>
       </div>
-      <button onClick={openModal} className="button-primary">
-        Create Task
-      </button>
+      {/* Condition Rendering for button to react when the tasks are existing or
+      not. If the condition is true it will applay the button (with &&.) */}
+      {taskList.length > 0 && (
+        <button onClick={openModal} className="button-primary">
+          Create Task
+        </button>
+      )}
       <Modal onClose={closeModal} isOpen={isOpen}>
         {/* Next are the "props.children" from Modal.jsx */}
         <div className="card-x1">
