@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./CreateTaskForms.css";
 import clsx from "clsx";
+import { FormValidation } from "../helper/formValidation";
 
 const CreateTaskForm = (props) => {
   const [taskName, setTaskName] = useState("");
@@ -30,29 +31,7 @@ const CreateTaskForm = (props) => {
   };
 
   useEffect(() => {
-    let taskNameError = "";
-    let dueDateError = "";
-    let taskDetailsError = "";
-    let isValidError = "";
-
-    if (taskName.length === 0) {
-      taskNameError = "This field is required";
-      isValidError = false;
-    }
-    if (dueDate.length === 0) {
-      dueDateError = "This field is required";
-      isValidError = false;
-    }
-    if (taskDetails.length === 0) {
-      taskDetailsError = "This field need more then 3 characters";
-      isValidError = false;
-    }
-    setFormValidation({
-      taskName: taskNameError,
-      dueDate: dueDateError,
-      taskDetails: taskDetailsError,
-      isValid: isValidError,
-    });
+    setFormValidation(FormValidation(taskName, dueDate, taskDetails));
   }, [taskName, dueDate, taskDetails]);
 
   const handleSubmit = (event) => {
