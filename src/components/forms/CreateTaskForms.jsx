@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import "./CreateTaskForms.css";
+import React, { useState, useEffect } from "react";
 import clsx from "clsx";
-import { FormValidation } from "../helper/formValidation";
+import { validateForm } from "./helper/formValidation";
+import "./CreateTaskForms.css";
 
-const CreateTaskForm = (props) => {
+const CreateTaskForms = (props) => {
   const [taskName, setTaskName] = useState("");
-  const [dueDate, setTaskDate] = useState("");
+  const [dueDate, setDueDate] = useState("");
   const [taskDetails, setTaskDetails] = useState("");
   const [formValidation, setFormValidation] = useState({
     taskName: "",
@@ -14,88 +14,96 @@ const CreateTaskForm = (props) => {
     isValid: true,
   });
 
+  useEffect(() => {
+    setFormValidation(validateForm(taskName, dueDate, taskDetails));
+  }, [taskName, dueDate, taskDetails]);
+
   const handleNameChange = (event) => {
     setTaskName(event.target.value);
   };
-  const handleDataChange = (event) => {
-    setTaskDate(event.target.value);
+
+  const handleDateChange = (event) => {
+    setDueDate(event.target.value);
   };
+
   const handleDetailsChange = (event) => {
     setTaskDetails(event.target.value);
   };
 
-  const resetForms = () => {
+  const resetForm = () => {
     setTaskName("");
-    setTaskDate("");
+    setDueDate("");
     setTaskDetails("");
   };
-
-  useEffect(() => {
-    setFormValidation(FormValidation(taskName, dueDate, taskDetails));
-  }, [taskName, dueDate, taskDetails]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const newTask = {
       name: taskName,
       dueDate: dueDate,
-      details: taskDetails,
+      taskDetails: taskDetails,
       status: "Todo",
     };
-    props.onNewAddTask(newTask);
-    resetForms();
-  };
 
+    props.addNewTask(newTask);
+    resetForm();
+  };
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <div className="form-row">
-          <label className="label-vd">Task Name</label>
+          <label className="label-md">Task Name</label>
           <input
             value={taskName}
+            name="taskName"
             onChange={handleNameChange}
-            className={clsx(`input-primary`, {
-              ["error"]: formValidation.taskName,
-            })}
+            className={clsx(
+              "input-primary",
+              formValidation.taskName && "error"
+            )}
             type="text"
           />
           <p className="error-message">{formValidation.taskName}</p>
         </div>
+
         <div className="form-row">
-          <label className="label-vd">Due Data</label>
+          <label className="label-md">Due Date</label>
           <input
             value={dueDate}
-            onChange={handleDataChange}
-            className={clsx("input-primary", {
-              ["error"]: formValidation.dueDate,
-            })}
+            name="dueDate"
+            onChange={handleDateChange}
+            className={clsx("input-primary", formValidation.dueDate && "error")}
             type="date"
           />
           <p className="error-message">{formValidation.dueDate}</p>
         </div>
+
         <div className="form-row">
-          <label className="label-vd">Details</label>
+          <label className="label-md">Task Details</label>
           <textarea
             value={taskDetails}
+            name="taskDetails"
             onChange={handleDetailsChange}
-            className={clsx("input-primary", {
-              ["error"]: formValidation.taskDetails,
-            })}
-            cols="38"
+            className={clsx(
+              "input-primary",
+              formValidation.taskDetails && "error"
+            )}
+            cols="30"
             rows="10"
           ></textarea>
           <p className="error-message">{formValidation.taskDetails}</p>
         </div>
+
         <button
           disabled={!formValidation.isValid}
           className="button-primary"
           type="submit"
         >
-          Create
+          Create Task
         </button>
       </form>
     </div>
   );
 };
 
-export default CreateTaskForm;
+export default CreateTaskForms;

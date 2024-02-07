@@ -2,22 +2,24 @@
   background-color: #f2f2f2;
   padding: 5px 10px;
   border-radius: 12px;
+  color: #808080;
 }
+
 .badge p {
-  font-size: 14px;
-  line-height: 17px;
-  /* Color Inherit is for React, to put the colors in the function. */
-  color: inherit;
   font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  color: inherit;
 }
+
 .grey {
   background-color: #f2f2f2;
   color: #808080;
 }
 
-.red {
+.black {
   background-color: #e2e2e2;
-  color: #ff0000;
+  color: #16171d;
 }
 
 .blue {

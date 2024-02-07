@@ -1,23 +1,41 @@
-.app {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
-  background-color: aliceblue;
+.app-container {
   min-height: 100vh;
-}
-.card-x1 {
   display: flex;
-  flex-direction: column;
-  text-align: start;
-  margin: 0px 20px;
-  background: rgb(255, 255, 255);
-  border: 1px solid rgb(221, 220, 220);
-  border-radius: 20px;
-  padding: 0px;
-  height: 100%;
-  padding: 25px;
+  padding: 30px;
+  max-height: 100vh;
 }
-#create-task {
-  margin: 20px 0px;
+
+.app-content {
+  flex: 1;
+  display: flex;
+}
+
+.card-xl {
+  background-color: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+  position: relative;
+}
+
+.card-xl h3 {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 34px;
+  letter-spacing: -0.02em;
+
+  color: #000000;
+}
+
+.side-bar-right {
+  width: 100%;
+}
+
+.subtitle {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  color: #636363;
 }

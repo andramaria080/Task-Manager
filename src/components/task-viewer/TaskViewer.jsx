@@ -1,35 +1,45 @@
-import "./TaskViewer.css";
-import TaskCard from "../TaskCard/TaskCard";
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
+import TaskCard from "../task-card/TaskCard";
 import ControlPanel from "../control-panel/ControlPanel";
 import EmptyListMessage from "../empty-list-message/EmptyListMessage";
+import "./TaskViewer.css";
 
-function TaskViewer(props) {
+export const StatusContext = createContext();
+
+const TaskViewer = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState("All Tasks");
+
+  const displayedItems = props.taskList.filter((item) => {
+    if (selectedStatus === "All Tasks") {
+      return true;
+    }
+    return item.status === selectedStatus;
+  });
 
   return (
     <div className="task-viewer-container">
-      <ControlPanel
-        // Send the ControlPanel's props to have them with the obj ContolPanel from ControlPanel.jsx, to work with them here.
-        taskList={props.taskList}
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        onNewTaskAdd={props.onNewTaskAdd}
-      />
-      <div className=" task-viewer-body">
+      <StatusContext.Provider value={{ selectedStatus, setSelectedStatus }}>
+        <ControlPanel
+          taskList={props.taskList}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          onNewTaskAdd={props.onNewTaskAdd}
+        />
+      </StatusContext.Provider>
+
+      <div className="task-list-container">
         {props.taskList.length > 0 ? (
-          <div className=" task-list">
-            {props.taskList.map((item) => {
-              return (
-                <TaskCard
-                  key={item.id}
-                  id={item.id}
-                  status={item.status}
-                  name={item.name}
-                  dueDate={item.dueDate}
-                />
-              );
-            })}
+          <div className="task-list-grid">
+            {displayedItems.map((item) => (
+              <TaskCard
+                key={item.id}
+                id={item.id}
+                status={item.status}
+                name={item.name}
+                dueDate={item.dueDate}
+              />
+            ))}
           </div>
         ) : (
           <EmptyListMessage onCreateTaskClick={setIsOpen} />
@@ -37,6 +47,6 @@ function TaskViewer(props) {
       </div>
     </div>
   );
-}
+};
 
 export default TaskViewer;

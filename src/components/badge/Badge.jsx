@@ -1,25 +1,15 @@
-import "./Badge.css";
 import React from "react";
+import "./Badge.css";
 
-function Badge(props) {
-  const getBadgeStyle = () => {
-    switch (props.status) {
-      case "ToDo":
-        return "grey";
-      case "In progress":
-        return "blue";
-      case "Complete":
-        return "green";
-      case "Panding":
-        return "orange";
-      default:
-        return "grey";
-    }
-  };
+const BADGE_COLORS = ["grey", "black", "blue", "orange", "black", "green"];
+
+const Badge = (props) => {
+  const badgeColor = BADGE_COLORS.includes(props.color) ? props.color : "grey";
   return (
-    <div className={`badge ${getBadgeStyle()}`}>
-      <p>{props.status}</p>
+    <div className={`badge ${badgeColor}`}>
+      <p>{props.label}</p>
     </div>
   );
-}
+};
+
 export default Badge;
